@@ -70,11 +70,9 @@
 			return $this->booklist_render($file_contents);
 		}
 		private function booklist_render($file_contents){
-			require "simple_html_dom.php";
-			$booktable = str_get_html($file_contents);
-			//$titlelist = $booktable->find('td[class=patFuncTitle]');//(?<=chx"> ).+(?=</a></label>)
+			//(?<=chx"> ).+(?=</a></label>)
 			preg_match_all("/(?<=chx\"> ).+(?=<\/a><\/label>)/", $file_contents, $titlelist, PREG_PATTERN_ORDER);
-			//$timelist = $booktable->find('td[class=patFuncStatus]');//(?<=到期 )\d{2}-\d{2}-\d{2}
+			//(?<=到期 )\d{2}-\d{2}-\d{2}
 			preg_match_all("/(?<=到期 )\d{2}-\d{2}-\d{2}/", $file_contents, $timelist, PREG_PATTERN_ORDER);
 			for($i=0;$i<sizeof($titlelist[0]);$i++){
 				$title = $titlelist[0][$i];
